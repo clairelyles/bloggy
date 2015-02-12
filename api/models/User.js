@@ -25,6 +25,14 @@ module.exports = {
       type: 'string',
       required: true
     },
+    comments: {
+      collection:'Comment',
+      via:'owner'
+    },
+    posts: {
+      collection:'Post',
+      via:'owner'
+    },
 
     toJSON: function() {
       var userObj = this.toObject();

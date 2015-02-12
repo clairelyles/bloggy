@@ -5,21 +5,48 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+ // .then(function(comment) {
+
+ //    }).catch(function(err) {
+
+// SAME AS
+
+//.exec(function(err,post) {
+
 module.exports = {
-  // create: function(req,res){
-  //   var data = req.body || {};
-  //   data.rando = Math.floor(Math.random()*9999)
-  //   Post.create(data).exec(function(err,post){
-  //     if (err) return res.send(err); // break code and send back error
-  //     res.send(post);
-  //   });
-  // },
-  // mine: function(req,res){
-  //   // res.send("Herro.")
-  //   Post.find().exec(function(err,posts){
-  //     // res.send(posts);
-  //     res.render('about');
-  //   });
-  // }
+
+  create: function(req,res){
+    var postData = {
+      title: req.body.title,
+      body: req.body.body,
+      owner:req.session.user.id
+    };
+    Post.create(postData).exec(function(err,post) {
+      if (err) res.send(err);
+      res.send(post);
+    })
+  },
+  addComment: function(req, res) {
+    commentData = {
+      body: req.body.body,
+      post: req.params.postid,
+      owner: req.session.user.id
+    };
+    Comment.create(commentData).then(function(comment) {
+      comment.owner = req.session.user;
+      res.send(comment);
+    }).catch(function(err) {
+      res.send(400,err)
+    })
+  },
+  getComments: function(req, res) {
+    Comment.find({where:{post:req.params.postid}})
+      .populate('owner').then(function(comments) {
+        res.send(comments);
+      }).catch(function(err) {
+        res.send(400,err);
+      })
+  }
+
 }
 

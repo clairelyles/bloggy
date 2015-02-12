@@ -22,6 +22,9 @@ module.exports = {
     comments: {
       collection: 'Comment',
       via: 'post'
+    },
+    owner: {
+      model: 'User'
     }
 
   }

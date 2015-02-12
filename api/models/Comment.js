@@ -18,6 +18,9 @@ module.exports = {
     // taco or post --> name it whatever you want!
     post: {
       model: 'Post'
+    },
+    owner: {
+      model: 'User'
     }
 
   }

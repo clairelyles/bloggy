@@ -12,6 +12,7 @@ myBlogApp.controller('HomeCtrl', ['$scope', '$http', '$modal', 'AlertService', '
 
   // settings for the $http requrest
   var req = {
+    method: 'get'
     url: '/api/post',
     params: {
       'sort':'createdAt desc'
@@ -22,9 +23,9 @@ myBlogApp.controller('HomeCtrl', ['$scope', '$http', '$modal', 'AlertService', '
     req.params.body = "%" + searchTerm + "%";
   }
 
-  $http(req).success(function(data){
-    $scope.posts = data;
-  });
+  // $http(req).success(function(data){
+  //   $scope.posts = data;
+  // });
 
   $scope.deletePost = function(idx) {
     var postId = $scope.posts[idx].id;

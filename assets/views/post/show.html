@@ -22,9 +22,9 @@
 
       <hr>
 
-      <div ng-repeat="comment in post.comments | orderBy:'createdAt':true">
+      <div ng-repeat="comment in comments | orderBy:'createdAt':true">
         <p>{{comment.body}}</p>
-        <p><em>{{comment.createdAt | date:'short'}}</em></p>
+        <p><em>Authored by {{comment.owner.firstName || "Unknown"}} | {{comment.createdAt | date:'short'}}</em></p>
         <hr>
       </div>
     </div>

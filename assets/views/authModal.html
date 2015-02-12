@@ -1,31 +1,52 @@
 
-<div class="modal-body">
    <tabset justified="true">
     <tab heading="Login">
-      <form ng-submit="login()" class='login-form'>
-        <div class="form-group">
-            <label>E-mail</label>
-            <input type="text" class="form-control" ng-model="email" placeholder="Email" required>
-        </div>
-         <div class="form-group">
-            <label>Password</label>
-            <input ng-model="password" type="text" class="form-control" ng-model="password" placeholder="Password" required>
-        </div>
-        <input type="submit" value="Login" class="btn btn-primary">
-      </form>
+      <div class="modal-header">
+        <h2>Login</h2>
+      </div>
+      <div class="modal-body">
+        <form ng-submit="login()" class='login-form'>
+          <div class="form-group">
+              <label>E-mail</label>
+              <input type="text" class="form-control" ng-model="loginInfo.email" placeholder="Email" required>
+          </div>
+           <div class="form-group">
+              <label>Password</label>
+              <input ng-model="loginInfo.password" type="password" class="form-control" placeholder="Password" required>
+          </div>
+          <input type="submit" value="Login" class="btn btn-primary">
+        </form>
+      </div>
     </tab>
     <tab heading="Signup">
-      <form ng-submit="signup()" class="signup-form">
-        <div class="form-group">
-            <label>E-mail</label>
-            <input type="text" class="form-control" ng-model="email" placeholder="Email" required>
-        </div>
-         <div class="form-group">
-            <label>Password</label>
-            <input ng-model="password" type="text" class="form-control" ng-model="password" placeholder="Password" required>
-        </div>
-        <input type="submit" value="Signup" class="btn btn-primary">
-      </form>
+      <div class="modal-header">
+          <h2>Signup</h2>
+      </div>
+      <div class="modal-body">
+        <form ng-submit="signup()" class="signup-form">
+          <div class="form-group">
+              <label>Enter First Name</label>
+              <input type="text" class="form-control" ng-model="signupInfo.firstName" placeholder="First Name" required>
+          </div>
+          <div class="form-group">
+              <label>Enter Last Name</label>
+              <input type="text" class="form-control" ng-model="signupInfo.lastName" placeholder="Last Name" required>
+          </div>
+          <div class="form-group">
+              <label>Enter E-mail</label>
+              <input type="text" class="form-control" ng-model="signupInfo.email" placeholder="Email" required>
+          </div>
+           <div class="form-group">
+              <label>Choose Password</label>
+              <input ng-model="signupInfo.password" type="password" class="form-control" placeholder="Password" required>
+          </div>
+          <div class="form-group">
+              <label>Confirm Password</label>
+              <input ng-model="signupInfo.passwordConfirmation" type="password" class="form-control" placeholder="Password Confirmation" required>
+          </div>
+          <input type="submit" value="Signup" class="btn btn-primary">
+        </form>
+      </div>
     </tab>
   </tabset>
 </div>

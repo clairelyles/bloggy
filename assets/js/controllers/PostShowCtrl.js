@@ -2,6 +2,7 @@ myBlogApp.controller('PostShowCtrl', ['$scope', '$http', '$routeParams', '$locat
 
 
   var postId = $routeParams.id;
+  $scope.comments = [];
 
   $http.get('/api/post/'+postId).success(function(data){
     $scope.post = data;
@@ -9,6 +10,12 @@ myBlogApp.controller('PostShowCtrl', ['$scope', '$http', '$routeParams', '$locat
     $location.path('/');
     alert('that post could not be found');
   })
+
+  $http.get('/api/post/'+postId+'/comments')
+    .success(function(data) {
+      $scope.comments = data;
+    })
+
 
   $scope.editPost = function(idx) {
     $modal.open({
@@ -33,7 +40,7 @@ myBlogApp.controller('PostShowCtrl', ['$scope', '$http', '$routeParams', '$locat
     $http.post('/api/post/'+postId+'/comments',commentData)
       .success(function(data){
         $scope.commentText = '';
-        $scope.post = data;
+        $scope.comments.unshift(data);
       }).error(function(err){
         alert(err);
       })

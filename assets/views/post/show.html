@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-xs-8 col-xs-offset-1">
+
+    <div class="row">
+      <h2>
+        {{post.title}}
+        <button ng-click="editPost()" class="btn btn-warning btn-sm pull-right"><span class="glyphicon glyphicon-pencil"></span></button>
+      </h2>
+    </div>
+
+    <div class="row">
+
+      <p>{{post.body}}</p>
+      <h3>Comments</h3>
+
+      <form class="form" ng-submit="addComment()">
+        <div class="form-group">
+          <textarea ng-model="commentText" class='form-control' required></textarea>
+        </div>
+        <button class="btn btn-primary btn-sm">Add Comment</button>
+      </form>
+
+      <hr>
+
+      <div ng-repeat="comment in post.comments | orderBy:'createdAt':true">
+        <p>{{comment.body}}</p>
+        <p><em>{{comment.createdAt | date:'short'}}</em></p>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>

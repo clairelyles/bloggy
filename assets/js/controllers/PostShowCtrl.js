@@ -16,7 +16,6 @@ myBlogApp.controller('PostShowCtrl', ['$scope', '$http', '$routeParams', '$locat
       $scope.comments = data;
     })
 
-
   $scope.editPost = function(idx) {
     $modal.open({
       templateUrl: '/views/post/editModal.html',

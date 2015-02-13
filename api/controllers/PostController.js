@@ -22,7 +22,9 @@ module.exports = {
       owner:req.session.user.id
     };
     Post.create(postData).exec(function(err,post) {
-      if (err) res.send(err);
+      if (err) res.send(400, err);
+      Post.owner = req.session.user
+      Post.publishCreate(post); // publishCreate is a sails.socket.emit parameter
       res.send(post);
     })
   },

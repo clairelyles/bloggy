@@ -12,7 +12,7 @@ myBlogApp.controller('HomeCtrl', ['$scope', '$http', '$modal', 'AlertService', '
 
   // settings for the $http requrest
   var req = {
-    method: 'get'
+    method: 'get',
     url: '/api/post',
     params: {
       'sort':'createdAt desc'
@@ -26,6 +26,37 @@ myBlogApp.controller('HomeCtrl', ['$scope', '$http', '$modal', 'AlertService', '
   // $http(req).success(function(data){
   //   $scope.posts = data;
   // });
+  io.socket.request(req.url, req.params, function(data,jwrs) {
+    $scope.$apply(function() {
+      $scope.posts = data;
+    })
+    console.log("jwrs: ",jwrs);
+  });
+
+  //listen for changes
+  io.socket.on('post', function(event) {
+    switch(event.verb) {
+      case 'updated':
+        $scope.posts.forEach(function(item,idx) {
+          if (item.id == event.id) {
+            $scope.$apply(function() {
+              event.data.id = event.id;
+              event.data.owner = item.owner;
+              $scope.posts[idx] = event.data;
+            });
+          }
+
+        });
+        break;
+      case 'created':
+          $scope.$apply(function() {
+            $scope.posts.unshift(event.data);
+          });
+        break;
+      default:
+          console.log('event', event)
+    }
+  })
 
   $scope.deletePost = function(idx) {
     var postId = $scope.posts[idx].id;
